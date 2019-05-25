@@ -1,6 +1,7 @@
 import subprocess
 import os
 import sys
+import pytest
 
 print('test')
 
@@ -9,4 +10,4 @@ result = subprocess.check_output( ["python", "dev/main.py", "data"] ).decode("UT
 if result == '1274383':
   print('OK')
 else:
-  print('NG')
+  raise ValueError("error!")
