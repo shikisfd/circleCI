@@ -1,16 +1,17 @@
 version: 2
 jobs:
   build:
-    working_directory: /home/ubuntu/circleCI
-
     docker:
-      - image: python:3
+      - image: python:3 # ベースとなるDocker imageを指定
+    environment:
+      TZ: /usr/share/zoneinfo/Asia/Tokyo # Time Zoneを指定
+    working_directory: /home/ubuntu/circleCI # コード実行場所 以下のstepsはworking_directoryで実行される
 
-    steps:
-      - checkout
-      - run: apt-get update && apt-get install -y libgmp3-dev
-      - run:
-          name: Install dependencies
+    steps: 
+      - checkout # working_directoryにcheckout
+      - run: apt-get update && apt-get install -y libgmp3-dev # command lineのプログラムを発動させる
+      - run: 
+          name: Install dependencies # runには名前をつけることができる
           command: pip install -r requirements.txt
       - run:
           name: Run tests
